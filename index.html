@@ -1,0 +1,367 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Renaissance Tailor Suits | Bespoke & Made-to-Measure in Gurgaon</title>
+  <meta name="description" content="Renaissance Tailor Suits crafts bespoke and made-to-measure suits, shirts, and occasion wear in Gurgaon, Haryana. Book an appointment for in-studio fittings or home visits." />
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b0f1a;          /* deep navy */
+      --panel:#101524;       /* panels */
+      --muted:#9aa4b2;       /* muted text */
+      --brand:#9f7aea;       /* accent purple */
+      --brand-2:#22d3ee;     /* accent cyan */
+      --text:#e5e7eb;        /* base text */
+      --line:#1f2937;        /* borders */
+      --gold:#d4af37;        /* subtle luxury accent */
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji";}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:min(1200px,92%);margin-inline:auto}
+    /* Header */
+    header.site{
+      position:sticky;top:0;z-index:50;background:rgba(11,15,26,.85);backdrop-filter:saturate(150%) blur(8px);border-bottom:1px solid var(--line);
+    }
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:.9rem 0}
+    .brand{display:flex;align-items:center;gap:.75rem}
+    .brand-mark{width:36px;height:36px;border:1px solid var(--gold);border-radius:8px;display:grid;place-items:center;font-weight:700;color:var(--gold)}
+    .brand h1{font:700 1.1rem/1 Playfair Display,serif;margin:0}
+    .nav a.btn{padding:.6rem 1rem;border:1px solid var(--line);border-radius:10px;transition:.25s;background:linear-gradient(180deg,#0e1426,#0b0f1a);}
+    .nav a.btn:hover{border-color:var(--brand);box-shadow:0 0 0 3px rgba(159,122,234,.15)}
+    .navlinks{display:flex;gap:1rem;align-items:center}
+    .navlinks a{opacity:.9}
+    @media (max-width:840px){.navlinks{display:none}}/* Hero */
+.hero{position:relative;isolation:isolate}
+.hero::before{content:"";position:absolute;inset:0;background:url('https://replicate.delivery/xezq/MVxC9riT6g5eLqvgzuizfwb3yZLMEnB9JmDuqm47CL5r04UVA/output_-1_0.png') center/cover no-repeat;opacity:.35;z-index:-2}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(1000px 400px at 20% 10%,rgba(34,211,238,.20),transparent 50%),
+                                        radial-gradient(800px 400px at 90% 30%,rgba(159,122,234,.15),transparent 50%),
+                                        linear-gradient(180deg,rgba(11,15,26,.05),rgba(11,15,26,.8) 70%,#0b0f1a);z-index:-1}
+.hero-inner{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:center;padding:7vh 0 10vh}
+.kicker{letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-size:.8rem}
+.hero h2{font:700 clamp(2rem,4vw,3rem)/1.1 Playfair Display,serif;margin:.4rem 0 1rem}
+.hero p{color:#cbd5e1;font-size:1.05rem;max-width:60ch}
+.cta{display:flex;gap:.75rem;margin-top:1.25rem;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:.5rem;border:1px solid var(--line);border-radius:12px;padding:.8rem 1rem;font-weight:600;transition:.25s}
+.btn-primary{background:linear-gradient(180deg,#111827,#0b0f1a);border-color:#2a3347;box-shadow:inset 0 1px 0 rgba(255,255,255,.03)}
+.btn-primary:hover{border-color:var(--brand);box-shadow:0 0 0 4px rgba(159,122,234,.15)}
+.btn-ghost:hover{border-color:var(--brand-2)}
+.badge{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.4rem .7rem;font-size:.78rem;color:#cbd5e1}
+.hero-card{background:rgba(16,21,36,.7);border:1px solid var(--line);border-radius:16px;padding:1rem}
+
+@media (max-width:980px){.hero-inner{grid-template-columns:1fr}.hero .media{order:-1} }
+
+/* Sections */
+section{padding:64px 0;border-top:1px solid var(--line)}
+.section-title{font:700 clamp(1.4rem,2.5vw,2rem)/1.2 Playfair Display,serif;margin:0 0 .75rem}
+.section-sub{color:#cbd5e1;margin:0 0 1.2rem}
+
+/* Services */
+.grid{display:grid;gap:1rem}
+.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:900px){.grid-3{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.grid-3,.grid-2{grid-template-columns:1fr}}
+.card{background:linear-gradient(180deg,#0f1426,#0b0f1a);border:1px solid var(--line);border-radius:16px;padding:1.1rem;transition:transform .25s ease, border-color .25s}
+.card:hover{transform:translateY(-2px);border-color:#334155}
+.card h3{font:600 1.1rem/1.2 Inter;margin:.2rem 0 .5rem}
+.muted{color:var(--muted)}
+
+/* Process */
+.steps{counter-reset:step}
+.step{position:relative;padding-left:3.25rem}
+.step+.step{margin-top:1rem}
+.step::before{counter-increment:step;content:counter(step);position:absolute;left:0;top:.2rem;width:2.2rem;height:2.2rem;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);background:#0e1426;color:#cbd5e1;font-weight:700}
+
+/* Gallery */
+.gallery{display:grid;grid-template-columns:repeat(12,1fr);gap:10px}
+.gallery figure{margin:0;position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+.gallery img{width:100%;height:100%;object-fit:cover}
+.gallery .span-6{grid-column:span 6}
+.gallery .span-3{grid-column:span 3}
+@media (max-width:900px){.gallery{grid-template-columns:repeat(6,1fr)}.gallery .span-6{grid-column:span 6}.gallery .span-3{grid-column:span 3}}
+@media (max-width:600px){.gallery{grid-template-columns:repeat(2,1fr)}.gallery .span-6,.gallery .span-3{grid-column:span 2}}
+
+/* Booking */
+form{display:grid;gap:1rem}
+.field{display:flex;flex-direction:column;gap:.35rem}
+.field label{font-size:.92rem;color:#cbd5e1}
+.field input,.field select,.field textarea{background:#0e1426;border:1px solid #1f2b44;color:#e5e7eb;padding:.85rem;border-radius:12px}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--brand)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media (max-width:640px){.two{grid-template-columns:1fr}}
+.note{font-size:.9rem;color:var(--muted)}
+
+/* Footer */
+footer{border-top:1px solid var(--line);padding:40px 0;color:#cbd5e1}
+.footgrid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:1.4rem}
+@media (max-width:900px){.footgrid{grid-template-columns:1fr}}
+.social a{display:inline-flex;align-items:center;gap:.5rem;border:1px solid var(--line);border-radius:10px;padding:.5rem .7rem;margin-right:.5rem;margin-bottom:.5rem}
+.small{font-size:.85rem;color:var(--muted)}
+
+/* Toast */
+.toast{position:fixed;right:16px;bottom:16px;background:#0e1426;border:1px solid var(--line);padding:12px 14px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.35);opacity:0;transform:translateY(8px);transition:.35s}
+.toast.show{opacity:1;transform:translateY(0)}
+
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Tailor",
+    "name": "Renaissance Tailor Suits",
+    "image": "https://replicate.delivery/xezq/MVxC9riT6g5eLqvgzuizfwb3yZLMEnB9JmDuqm47CL5r04UVA/output_-1_0.png",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "DLF Cyber City",
+      "addressLocality": "Gurgaon",
+      "addressRegion": "Haryana",
+      "postalCode": "122002",
+      "addressCountry": "IN"
+    },
+    "url": "https://example.com",
+    "telephone": "+91 99999 99999",
+    "priceRange": "₹₹₹"
+  }
+  </script>
+</head>
+<body>
+  <header class="site">
+    <div class="container nav">
+      <div class="brand">
+        <div class="brand-mark">RT</div>
+        <h1>Renaissance Tailor Suits</h1>
+      </div>
+      <nav class="navlinks">
+        <a href="#services">Services</a>
+        <a href="#process">Process</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#booking" class="btn btn-ghost">Book</a>
+        <a href="#contact" class="btn btn-primary">Contact</a>
+      </nav>
+    </div>
+  </header>  <section class="hero">
+    <div class="container hero-inner">
+      <div>
+        <span class="kicker">Gurgaon • Bespoke & Made-to-Measure</span>
+        <h2>Handcrafted Suits for Modern Leaders</h2>
+        <p>From first sketch to final stitch, we tailor suits that carry presence—using premium fabrics, precise patterning, and time-honoured craft. Visit our studio in Gurgaon or book a concierge fitting at your home or office.</p>
+        <div class="cta">
+          <a href="#booking" class="btn btn-primary">Book an Appointment</a>
+          <a href="#gallery" class="btn">Explore the Collection</a>
+          <span class="badge">48-72 hr express options</span>
+        </div>
+      </div>
+      <div class="media hero-card">
+        <img src="https://replicate.delivery/xezq/huym7TKimWZAKBPqxCDRFvQucXbeAG9cVEtaYJgHvMbYccqKA/output_-1_0.png" alt="Tailored suit close-up with hand stitching" />
+      </div>
+    </div>
+  </section>  <section id="services">
+    <div class="container">
+      <h3 class="section-title">What We Tailor</h3>
+      <p class="section-sub">Bespoke construction, made-to-measure precision, and alterations—all under one roof.</p>
+      <div class="grid grid-3">
+        <article class="card">
+          <h3>Signature Bespoke Suit</h3>
+          <p class="muted">Full-canvas craftsmanship with hand-set sleeves, surgeon cuffs, and Milanese buttonholes. Multiple basted fittings for a sculpted silhouette.</p>
+        </article>
+        <article class="card">
+          <h3>Made-to-Measure</h3>
+          <p class="muted">Smart pattern adjustments from your measurements. Efficient lead times while retaining house style and fine finishing.</p>
+        </article>
+        <article class="card">
+          <h3>Shirts & Occasion Wear</h3>
+          <p class="muted">Spread to cutaway collars, tuxedo shirts, bandhgala, achkan, Nehru jackets—elevated with premium cloth and precise details.</p>
+        </article>
+        <article class="card">
+          <h3>Alterations & Restyling</h3>
+          <p class="muted">From sleeve pitch to waist suppression, we refine the fit and extend the life of garments you love.</p>
+        </article>
+        <article class="card">
+          <h3>Concierge Fittings</h3>
+          <p class="muted">We visit your office or home in Gurgaon/Delhi NCR. Perfect for teams, executives, and wedding parties.</p>
+        </article>
+        <article class="card">
+          <h3>Corporate & Wedding Packages</h3>
+          <p class="muted">Group pricing and coordinated looks for firms and functions. Dedicated stylist support.</p>
+        </article>
+      </div>
+    </div>
+  </section>  <section id="process">
+    <div class="container">
+      <h3 class="section-title">Our Bespoke Process</h3>
+      <p class="section-sub">A measured journey from fabric to finesse.</p>
+      <div class="grid grid-2">
+        <div>
+          <div class="steps">
+            <div class="card step">
+              <h3>Consult & Style Direction</h3>
+              <p class="muted">We discuss occasion, climate, and your personal aesthetic to define lapels, vents, and details.</p>
+            </div>
+            <div class="card step">
+              <h3>Measurement & Pattern</h3>
+              <p class="muted">30+ measurements and posture notes inform a personal pattern. We advise on fabrics and lining.</p>
+            </div>
+            <div class="card step">
+              <h3>Basted Fitting</h3>
+              <p class="muted">Your suit is assembled loosely for mobility and shape checks. We refine chest, drape, and balance.</p>
+            </div>
+            <div class="card step">
+              <h3>Final Finish & Delivery</h3>
+              <p class="muted">Hand finishing, pressing, and a final try-on. Expect a suit that moves as you do.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://replicate.delivery/xezq/tcPeoEee7YdVIJ7Q3zgYfCLxL4oAvQDcrdb3ntwi3RS5MjTVB/output_-1_0.png" alt="Basted fitting in progress at the atelier" />
+        </div>
+      </div>
+    </div>
+  </section>  <section id="gallery">
+    <div class="container">
+      <h3 class="section-title">Lookbook</h3>
+      <p class="section-sub">A few recent commissions from our atelier in Gurgaon.</p>
+      <div class="gallery">
+        <figure class="span-6"><img src="https://replicate.delivery/xezq/ISM9LihLv8LeXaCujEZofoyIEdpw1k8MoFemYgiRywL0kxpqA/output_-1_0.png" alt="Charcoal suit with peak lapel"/></figure>
+        <figure class="span-6"><img src="https://replicate.delivery/xezq/VUbA0MwkfzWbZCstXgD2A9sSG3S3Jy2A9End17osHEFtYcqKA/output_-1_0.png" alt="Navy suit with soft shoulders"/></figure>
+        <figure class="span-3"><img src="https://replicate.delivery/xezq/huym7TKimWZAKBPqxCDRFvQucXbeAG9cVEtaYJgHvMbYccqKA/output_-1_0.png" alt="Wool texture close-up"/></figure>
+        <figure class="span-3"><img src="https://replicate.delivery/xezq/MVxC9riT6g5eLqvgzuizfwb3yZLMEnB9JmDuqm47CL5r04UVA/output_-1_0.png" alt="Atelier details"/></figure>
+        <figure class="span-6"><img src="https://replicate.delivery/xezq/tcPeoEee7YdVIJ7Q3zgYfCLxL4oAvQDcrdb3ntwi3RS5MjTVB/output_-1_0.png" alt="Hand stitching a lapel"/></figure>
+      </div>
+    </div>
+  </section>  <section id="booking">
+    <div class="container">
+      <h3 class="section-title">Book an Appointment</h3>
+      <p class="section-sub">Studio visit or concierge fitting across Gurgaon/Delhi NCR. We’ll confirm your slot by phone or WhatsApp.</p>
+      <div class="grid grid-2">
+        <form id="bookingForm" class="card" autocomplete="on">
+          <div class="two">
+            <div class="field">
+              <label for="name">Full Name</label>
+              <input id="name" name="name" required placeholder="Your name" />
+            </div>
+            <div class="field">
+              <label for="phone">Phone (WhatsApp)</label>
+              <input id="phone" name="phone" type="tel" required placeholder="+91 …" />
+            </div>
+          </div>
+          <div class="two">
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="you@example.com" />
+            </div>
+            <div class="field">
+              <label for="slot">Preferred Date & Time</label>
+              <input id="slot" name="slot" type="datetime-local" required />
+            </div>
+          </div>
+          <div class="two">
+            <div class="field">
+              <label for="service">Service</label>
+              <select id="service" name="service" required>
+                <option value="">Select…</option>
+                <option>Bespoke Suit</option>
+                <option>Made-to-Measure Suit</option>
+                <option>Shirt</option>
+                <option>Wedding / Occasion Wear</option>
+                <option>Alterations</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="visit">Visit Type</label>
+              <select id="visit" name="visit" required>
+                <option value="">Select…</option>
+                <option>Studio (Gurgaon)</option>
+                <option>Home/Office (NCR)</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="notes">Notes (height, fabric ideas, event date)</label>
+            <textarea id="notes" name="notes" rows="4" placeholder="Tell us a bit so we prepare swatches."></textarea>
+          </div>
+          <button class="btn btn-primary" type="submit">Request Booking</button>
+          <p class="note">By submitting, you consent to be contacted regarding your appointment. For immediate assistance, WhatsApp us at <a href="https://wa.me/919999999999" target="_blank" rel="noopener">+91 99999 99999</a>.</p>
+        </form>
+        <div class="card">
+          <h3>Visit Our Studio</h3>
+          <p class="muted">DLF Cyber City, Gurgaon, Haryana 122002. Open Mon–Sat, 10:00–19:00.</p>
+          <div style="border-radius:12px;overflow:hidden;border:1px solid var(--line);margin-top:1rem">
+            <iframe title="Gurgaon Map" src="https://www.google.com/maps?q=Gurugram%20Haryana&z=12&output=embed" width="100%" height="320" style="border:0"></iframe>
+          </div>
+          <div style="margin-top:1rem">
+            <a class="btn" href="tel:+919999999999">Call</a>
+            <a class="btn" href="https://wa.me/919999999999" target="_blank" rel="noopener">WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>  <section id="contact">
+    <div class="container">
+      <h3 class="section-title">Contact & Hours</h3>
+      <div class="grid grid-3">
+        <div class="card">
+          <h3>Studio</h3>
+          <p class="muted">DLF Cyber City, Gurgaon, Haryana 122002</p>
+          <p class="muted">Mon–Sat: 10:00–19:00<br>Sun: By appointment</p>
+        </div>
+        <div class="card">
+          <h3>Enquiries</h3>
+          <p class="muted"><a href="mailto:hello@renaissancetailor.in">hello@renaissancetailor.in</a><br><a href="tel:+919999999999">+91 99999 99999</a></p>
+          <p class="muted">For weddings & corporate: <a href="mailto:events@renaissancetailor.in">events@renaissancetailor.in</a></p>
+        </div>
+        <div class="card">
+          <h3>Follow</h3>
+          <p class="muted">Instagram • Facebook • LinkedIn</p>
+          <div class="social">
+            <a href="#">Instagram</a>
+            <a href="#">Facebook</a>
+            <a href="#">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>  <footer>
+    <div class="container footgrid">
+      <div>
+        <div class="brand" style="margin-bottom:.5rem"><div class="brand-mark">RT</div><h1>Renaissance Tailor Suits</h1></div>
+        <p class="small">Crafting bespoke and made-to-measure menswear in Gurgaon, Haryana. © <span id="year"></span> Renaissance Tailor Suits. All rights reserved.</p>
+      </div>
+      <div>
+        <p class="small">Policies</p>
+        <p class="small"><a href="#">Privacy Policy</a> • <a href="#">Terms of Service</a></p>
+      </div>
+      <div>
+        <p class="small">Payments</p>
+        <p class="small">UPI • Cards • Bank Transfer</p>
+      </div>
+    </div>
+  </footer>  <div class="toast" id="toast">Thanks! We’ll confirm your appointment shortly.</div>  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Simple client-side handler (no backend). Replace with Formspree/Netlify for production.
+    const form = document.getElementById('bookingForm');
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      // Build a mailto fallback
+      const subject = encodeURIComponent(`[Booking Request] ${data.service || 'Fitting'} - ${data.name}`);
+      const body = encodeURIComponent(
+        `Name: ${data.name}\nPhone: ${data.phone}\nEmail: ${data.email || '-'}\nWhen: ${data.slot}\nService: ${data.service}\nVisit: ${data.visit}\nNotes: ${data.notes || '-'}\n`);
+      // Open WhatsApp if phone present, else mailto
+      const wa = `https://wa.me/919999999999?text=${body}`;
+      window.open(wa, '_blank');
+      // Show toast
+      const t = document.getElementById('toast');
+      t.classList.add('show');
+      setTimeout(()=>t.classList.remove('show'), 4200);
+      form.reset();
+    });
+  </script></body>
+</html>
