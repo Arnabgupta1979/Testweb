@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WP4 — AI for Local-Language Farm Advisory</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+        }
+
+        .sidebar {
+            width: 300px;
+            background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            overflow-y: auto;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            background: rgba(0,0,0,0.2);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .sidebar-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .search-box {
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            placeholder-color: rgba(255,255,255,0.7);
+        }
+
+        .search-input::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .nav-menu {
+            padding: 20px 0;
+        }
+
+        .nav-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-item:hover {
+            background: rgba(255,255,255,0.1);
+            border-left-color: #3498db;
+        }
+
+        .nav-item.active {
+            background: rgba(52, 152, 219, 0.2);
+            border-left-color: #3498db;
+        }
+
+        .nav-item i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            background: white;
+        }
+
+        .content-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .content-title {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .content-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .milestone-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .content-body {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-content {
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .architecture-diagram {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .diagram-layer {
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #e9ecef;
+            position: relative;
+        }
+
+        .layer-data { background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); }
+        .layer-etl { background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%); }
+        .layer-app { background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%); }
+        .layer-interface { background: linear-gradient(135deg, #fff3e0 0%, #ffcc02 100%); }
+
+        .layer-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .data-table th {
+            background: #3498db;
+            color: white;
+            font-weight: 600;
+        }
+
+        .data-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            border-top: 4px solid #3498db;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 5px;
+        }
+
+        .metric-label {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .highlight-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .risk-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .risk-table th,
+        .risk-table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #e9ecef;
+        }
+
+        .risk-table th {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .risk-high { background: #ffebee; }
+        .risk-medium { background: #fff3e0; }
+        .risk-low { background: #e8f5e8; }
+
+        .collapsible {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .collapsible-content {
+            max-height: 1000px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .collapsible-content.collapsed {
+            max-height: 0;
+        }
+
+        .toggle-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-icon.rotated {
+            transform: rotate(180deg);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            
+            .content-title {
+                font-size: 2rem;
+            }
+            
+            .content-body {
+                padding: 20px;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const App = () => {
+            const [activeSection, setActiveSection] = useState('executive-summary');
+            const [searchTerm, setSearchTerm] = useState('');
+            const [collapsedSections, setCollapsedSections] = useState({});
+
+            const sections = [
+                { id: 'executive-summary', title: 'Executive Summary', icon: 'fas fa-chart-line' },
+                { id: 'scope', title: 'Scope & Objectives', icon: 'fas fa-bullseye' },
+                { id: 'architecture', title: 'Architecture', icon: 'fas fa-project-diagram' },
+                { id: 'data-sources', title: 'Data Sources & Flows', icon: 'fas fa-database' },
+                { id: 'prototype', title: 'Current Prototype', icon: 'fas fa-cogs' },
+                { id: 'technical-bom', title: 'Technical Bill of Materials', icon: 'fas fa-list-ul' },
+                { id: 'targets', title: 'Targets We Will Prove', icon: 'fas fa-crosshairs' },
+                { id: 'governance', title: 'Governance & Security', icon: 'fas fa-shield-alt' },
+                { id: 'model-choice', title: 'Model Choice Update', icon: 'fas fa-brain' },
+                { id: 'metrics', title: 'Prototype Metrics', icon: 'fas fa-chart-bar' },
+                { id: 'evaluation', title: 'Evaluation Plan', icon: 'fas fa-clipboard-check' },
+                { id: 'integration', title: 'Integration & Reuse', icon: 'fas fa-puzzle-piece' },
+                { id: 'risks', title: 'Risks & Mitigations', icon: 'fas fa-exclamation-triangle' },
+                { id: 'roadmap', title: 'Roadmap M6→M12', icon: 'fas fa-road' }
+            ];
+
+            const toggleSection = (sectionId) => {
+                setCollapsedSections(prev => ({
+                    ...prev,
+                    [sectionId]: !prev[sectionId]
+                }));
+            };
+
+            const filteredSections = sections.filter(section =>
+                section.title.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+
+            const renderExecutiveSummary = () => (
+                <div className="section">
+                    <h2 className="section-title">
+                        <i className="fas fa-chart-line"></i>
+                        Executive Summary
+                    </h2>
+                    <div className="section-content">
+                        <p>WP4 is designing a secure, on-premise, multilingual farm advisory system that grounds answers in WUR research (reports, datasets) using RAG and speech/translation for low-resource languages. Since M1, we have a working ETL → vectorization → local LLM prototype and a clear architecture for adding speech and translation. For M12 we target a demonstrator (D4.1) and a conference paper (D4.2).</p>
+                        
+                        <div className="highlight-box">
+                            <div className="highlight-title">
+                                <i className="fas fa-rocket"></i>
+                                Design Update for M6
+                            </div>
+                            <p>We propose evaluating OpenAI's new open-weights <strong>gpt-oss-20b</strong> in place of (or alongside) Mistral-7B. The 20B model is optimized for modest hardware and can run with ~16 GB memory, offering parity with o3-mini on common benchmarks per OpenAI's announcement and model card (Apache-2.0 licensed).</p>
+                        </div>
+
+                        <div className="metrics-grid">
+                            <div className="metric-card">
+                                <div className="metric-value">114</div>
+                                <div className="metric-label">Files in Corpus</div>
+                            </div>
+                            <div className="metric-card">
+                                <div className="metric-value">640MB</div>
+                                <div className="metric-label">Total Data Size</div>
+                            </div>
+                            <div className="metric-card">
+                                <div className="metric-value">29</div>
+                                <div className="metric-label">High-Value Documents</div>
+                            </div>
+                            <div className="metric-card">
+                                <div className="metric-value">5</div>
+                                <div className="metric-label">Target Languages</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+
+            const renderScope = () => (
+                <div className="section">
+                    <h2 className="section-title">
+                        <i className="fas fa-bullseye"></i>
+                        Scope and Objectives
+                    </h2>
+                    <div className="section-content">
+                        <p><strong>Goal:</strong> Unlock WUR natural-language knowledge for farmers and advisors in LMICs via a locally hosted, privacy-preserving AI assistant with RAG + Speech + Translation. Priority domains: seeds & germplasm, plant protection, fertilization; initial geographies in Africa.</p>
+                        
+                        <h3>WP4 Objectives (abridged)</h3>
+                        <ul>
+                            <li>On-prem multilingual advisory (RAG over WUR docs + structured data)</li>
+                            <li>Speech in/out; translation (Swahili, French, Arabic, Dutch, English, etc.)</li>
+                            <li>Sound data governance; local hosting without cloud dependency</li>
+                            <li>Validation for accuracy/bias; user feedback loop</li>
+                        </ul>
+
+                        <h3>2025 Milestones/Deliverables</h3>
+                        <ul>
+                            <li><strong>M6:</strong> Use Case Vision & Design (this document)</li>
+                            <li><strong>M12:</strong> D4.1 prototype + D4.2 conference paper</li>
+                        </ul>
+                    </div>
+                </div>
+            );
+
+            const renderArchitecture = () => (
+                <div className="section">
+                    <h2 className="section-title">
+                        <i className="fas fa-project-diagram"></i>
+                        Architecture (high-level)
+                    </h2>
+                    <div className="section-content">
+                        <p>At its core, WP4 is a grounded question-answering system: users ask in Swahili/French/Arabic/English/Dutch; we transcribe/translate, retrieve evidence from WUR sources and selected open data, and generate a cited answer. Everything runs on-prem by default.</p>
+                        
+                        <div className="architecture-diagram">
+                            <h3>System Components</h3>
+                            
+                            <div className="diagram-layer layer-interface">
+                                <div className="layer-title">🌐 Multilingual I/O Interface</div>
+                                <p>STT (Speech-to-Text) • Translation • TTS (Text-to-Speech) • Web UI/API</p>
+                            </div>
+                            
+                            <div className="diagram-layer layer-app">
+                                <div className="layer-title">🧠 Application Layer</div>
+                                <p>Retriever • RAG Orchestrator • LLM Inference (Mistral-7B/GPT-OSS-20B)</p>
+                            </div>
+                            
+                            <div className="diagram-layer layer-etl">
+                                <div className="layer-title">⚙️ ETL & Indexing Pipeline</div>
+                                <p>Extract & Parse • Transform & QA • Embed & Index (FAISS/HNSW)</p>
+                            </div>
+                            
+                            <div className="diagram-layer layer-data">
+                                <div className="layer-title">📊 Data Layer</div>
+                                <p>WUR Reports (PDF/DOCX) • WUR Datasets (CSV/Parquet) • External Open Data (FAOSTAT, TASAI)</p>
+                            </div>
+                        </div>
+
+                        <h3>Key Design Principles</h3>
+                        <ul>
+                            <li><strong>On-Premises Deployment:</strong> Ensures data sovereignty and compliance</li>
+                            <li><strong>Hybrid Search:</strong> Combines semantic understanding with keyword matching</li>
+                            <li><strong>Citation Management:</strong> Maintains traceability back to source documents</li>
+                            <li><strong>Multilingual Support:</strong> Enables global collaboration</li>
+                        </ul>
+                    </div>
+                </div>
+            );
+
+            const renderDataSources = () => (
+                <div className="section">
+                    <h2 className="section-title">
+                        <i className="fas fa-database"></i>
+                        Data Sources & Flows
+                    </h2>
+                    <div className="section-content">
+                        <table className="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Source Group</th>
+                                    <th>Examples</th>
+                                    <th>Acquisition</th>
+                                    <th>Processing</th>
+                                    <th>Use</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>WUR internal reports</td>
+                                    <td>WUR project reports, policy briefs</td>
+                                    <td>File share / Library export</td>
+                                    <td>PDF text extraction; metadata capture</td>
+                                    <td>RAG context + citations</td>
+                                </tr>
+                                <tr>
+                                    <td>WUR datasets</td>
+                                    <td>CGN/seed, trials, soils</td>
+                                    <td>CSV/Parquet import</td>
+                                    <td>Schema infer; units; quality flags</td>
+                                    <td>Lightweight analytics; retrieval</td>
+                                </tr>
+                                <tr>
+                                    <td>External open data</td>
+                                    <td>FAOSTAT, World Bank, TASAI</td>
+                                    <td>HTTP/CSV</td>
+                                    <td>Harmonize + provenance</td>
+                                    <td>Background stats; retrieval hints</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <p><strong>ETL Narrative:</strong> We prioritise document trustworthiness (publisher, recency) and agronomic relevance (keyword taxonomy across seeds, soil, pests, policy). The pipeline maintains provenance tags and source fingerprints so the UI can always show "why" a statement appears.</p>
+                    </div>
+                </div>
+            );
+
+            const renderPrototype = () => (
+                <div className="section">
+                    <h2 className="section-title">
+                        <i className="fas fa-cogs"></i>
+                        Current Prototype and Corpus
+                    </h2>
+                    <div className="section-content">
+                        <p>From the symposium work: we have a functioning ETL → FAISS → local LLM pipeline on a research workstation.</p>
+                        
+                        <div className="metrics-grid">
+                            <div className="metric-card">
+                                <div className="metric-value">69</div>
+                                <div className="metric-label">PDF Files</div>
+                            </div>
+                            <div className="metric-card">
+                                <div className="metric-value">44</div>
+                                <div className="metric-label">CSV Files</div>
+                            </div>
+                            <div className="metric-card">
+                                <div className="metric-value">8</div>
+                                <div className="metric-label">High Relevance</div>
+                            </div>
+                            <div className="metric-card">
+                                <div className="metric-value">21</div>
+                                <div className="metric-label">Medium Relevance</div>
+                            </div>
+                        </div>
+
+                        <div className="highlight-box">
+                            <div className="highlight-title">
+                                <i className="fas fa-info-circle"></i>
+                                Why These Gates Matter
+                            </div>
+                            <p>With agricultural content, precision beats recall. A smaller, vetted index reduces irrelevant retrievals, improves answer faithfulness, and simplifies quality audits. We aggressively curate the top ~25% of sources for the live index.</p>
+                        </div>
+                    </div>
+                </div>
+            );
+
+            const renderTechnicalBOM = () => (
+                <div className="section">
+                    <h2 className="section-title">
+                        <i className="fas fa-list-ul"></i>
+                        Technical Bill of Materials
+                    </h2>
+                    <div className="section-content">
+                        <table className="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Layer</th>
+                                    <th>Component</th>
+                                    <th>Status (M6)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Parsing</td>
+                                    <td>PDF/DOCX parsers; metadata harvester</td>
+                                    <td>✅ Implemented in ETL prototype</td>
+                                </tr>
+                                <tr>
+                                    <td>Vector DB</td>
+                                    <td>FAISS (HNSW)</td>
+                                    <td>✅ Implemented</td>
+                                </tr>
+                                <tr>
+                                    <td>Embeddings</td>
+                                    <td>Sentence-Transformers (domain-tuned)</td>
+                                    <td>✅ Implemented</td>
+                                </tr>
+                                <tr>
+                                    <td>LLM (baseline)</td>
+                                    <td>Mistral-7B via Ollama</td>
+                                    <td>✅ Running locally</td>
+                                </tr>
+                                <tr>
+                                    <td>LLM (candidate)</td>
+                                    <td>gpt-oss-20b (open weights)</td>
+                                    <td>🔄 To evaluate</td>
+                                </tr>
+                                <tr>
+                                    <td>STT/TTS</td>
+                                    <td>Whisper / Coqui XTTS (local)</td>
+                                    <td>📋 Planned</td>
+                                </tr>
+                                <tr>
+                                    <td>Translation</td>
+                                    <td>NLLB / M2M-100 (local)</td>
+                                    <td>📋 Planned</td>
+                                </tr>
+                                <tr>
+                                    <td>API/UI</td>
+                                    <td>FastAPI + React</td>
+                                    <td>📋 Planned</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            );
+
+            const renderTargets = () => (
+                <div className="section">
+                    <h2 className="section-title">
+                        <i className="fas fa-crosshairs"></i>
+                        Targets We Will Prove
+                    </h2>
+                    <div className="section-content">
+                        <p>To keep scope concrete, we commit to the following M12 operating targets:</p>
+                        
+                        <table className="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Attribute</th>
+                                    <th>Target (M12)</th>
+                                    <th>Rationale</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Latency</td>
+                                    <td>P50 < 2.5s (text), < 4s (speech)</td>
+                                    <td>Conversational feel on modest hardware</td>
+                                </tr>
+                                <tr>
+                                    <td>Grounding</td>
+                                    <td>≥ 80% answers with verifiable citations</td>
+                                    <td>Trustworthiness, auditability</td>
+                                </tr>
+                                <tr>
+                                    <td>Language coverage</td>
+                                    <td>EN, NL, FR, SW, AR (text; basic speech)</td>
+                                    <td>Priority geographies & partners</td>
+                                </tr>
+                                <tr>
+                                    <td>Privacy</td>
+                                    <td>No outbound calls by default</td>
+                                    <td>On-prem mandate / governance</td>
+                                </tr>
+                                <tr>
+                                    <td>Availability</td>
+                                    <td>99% during demos</td>
+                                    <td>Stable internal showcases</td>
+                                </tr>
+                                <tr>
+                                    <td>Observability</td>
+                                    <td>Prompt/retrieval/output traces</td>
+                                    <td>Error analysis, continuous QA</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            );
+
+            const renderRisks = () => (
+                <div className="section">
+                    <h2 className="section-title">
+                        <i className="fas fa-exclamation-triangle"></i>
+                        Risks and Mitigations
+                    </h2>
+                    <div className="section-content">
+                        <table className="risk-table">
+                            <thead>
+                                <tr>
+                                    <th>Risk</th>
+                                    <th>Why it matters</th>
+                                    <th>What we'll do</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr className="risk-high">
+                                    <td>Hallucination in low-resource languages</td>
+                                    <td>Misleading advice</td>
+                                    <td>Enforce strict grounding; citation-first UI; abstain on low retrieval confidence</td>
+                                </tr>
+                                <tr className="risk-medium">
+                                    <td>Translation/STT errors</td>
+                                    <td>Miscomprehension</td>
+                                    <td>Keep pivot option; display key terms back to user; "did you mean?" confirmations</td>
+                                </tr>
+                                <tr className="risk-medium">
+                                    <td>Model drift</td>
+                                    <td>Accuracy decay</td>
+                                    <td>Quarterly re-index; regression prompts; capture user feedback loops</td>
+                                </tr>
+                                <tr className="risk-low">
+                                    <td>Hardware ceilings</td>
+                                    <td>Latency spikes</td>
+                                    <td>Use quantised profiles; cap top-k; micro-batching; consider gpt-oss-20b</td>
+                                </tr>
+                                <tr className="risk-medium">
+                                    <td>Governance gaps</td>
+                                    <td>Compliance issues</td>
+                                    <td>SSO/RBAC; audit logs; review with WDCC/WCDS; document DMP alignment</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            );
+
+            const renderRoadmap = () => (
+                <div className="section">
+                    <h2 className="section-title">
+                        <i className="fas fa-road"></i>
+                        Roadmap M6→M12
+                    </h2>
+                    <div className="section-content">
+                        <div style={{display: 'grid', gap: '20px'}}>
+                            <div style={{background: '#e3f2fd', padding: '20px', borderRadius: '8px', borderLeft: '5px solid #2196f3'}}>
+                                <h4>M6→M8: Foundation</h4>
+                                <ul>
+                                    <li>Integrate speech + translation</li>
+                                    <li>Add AuthN/Z and audit logging</li>
+                                    <li>Polish retriever policy (pivot thresholds)</li>
+                                </ul>
+                            </div>
+                            <div style={{background: '#f3e5f5', padding: '20px', borderRadius: '8px', borderLeft: '5px solid #9c27b0'}}>
+                                <h4>M7→M9: Model Evaluation</h4>
+                                <ul>
+                                    <li>Side-by-side eval: Mistral-7B vs gpt-oss-20b</li>
+                                    <li>Iterate quantisation and prompt templates</li>
+                                    <li>Pick default model</li>
+                                </ul>
+                            </div>
+                            <div style={{background: '#e8f5e8', padding: '20px', borderRadius: '8px', borderLeft: '5px solid #4caf50'}}>
+                                <h4>M8→M10: UX & Testing</h4>
+                                <ul>
+                                    <li>UX hardening</li>
+                                    <li>Multilingual UI labels and safety copy</li>
+                                    <li>Curate v2 eval set</li>
+                                </ul>
+                            </div>
+                            <div style={{background: '#fff3e0', padding: '20px', borderRadius: '8px', borderLeft: '5px solid #ff9800'}}>
+                                <h4>M10→M12: Delivery</h4>
+                                <ul>
+                                    <li>Freeze D4.1 demo build</li>
+                                    <li>Internal dry-runs</li>
+                                    <li>Draft D4.2 paper (methods, results, failures)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+
+            const renderSection = (sectionId) => {
+                switch(sectionId) {
+                    case 'executive-summary': return renderExecutiveSummary();
+                    case 'scope': return renderScope();
+                    case 'architecture': return renderArchitecture();
+                    case 'data-sources': return renderDataSources();
+                    case 'prototype': return renderPrototype();
+                    case 'technical-bom': return renderTechnicalBOM();
+                    case 'targets': return renderTargets();
+                    case 'governance': return (
+                        <div className="section">
+                            <h2 className="section-title"><i className="fas fa-shield-alt"></i> Governance, Security, and Hosting</h2>
+                            <div className="section-content">
+                                <ul>
+                                    <li><strong>Boundary:</strong> All inference and retrieval run inside WUR infrastructure, by default air-gapped from public APIs</li>
+                                    <li><strong>Access:</strong> SSO/LDAP; role-based permissions for researcher vs. demo users</li>
+                                    <li><strong>Provenance & logging:</strong> Immutable logs of prompts, retrieval sets, and cited sources</li>
+                                    <li><strong>Safety rails:</strong> Domain filters, citation-first UI, and answer abstention when confidence is low</li>
+                                </ul>
+                            </div>
+                        </div>
+                    );
+                    case 'model-choice': return (
+                        <div className="section">
+                            <h2 className="section-title"><i className="fas fa-brain"></i> Model Choice Update</h2>
+                            <div className="section-content">
+                                <p>We will keep Mistral-7B as a known-good baseline while we evaluate gpt-oss-20b on our own benchmarks.</p>
+                                <table className="data-table">
+                                    <thead>
+                                        <tr><th>Criterion</th><th>Mistral-7B</th><th>gpt-oss-20b (OpenAI)</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>Weights</td><td>Open weights</td><td>Open weights</td></tr>
+                                        <tr><td>License</td><td>Community variants</td><td>Apache-2.0</td></tr>
+                                        <tr><td>Memory</td><td>~8–16 GB typical</td><td>~16 GB edge profile</td></tr>
+                                        <tr><td>Signals</td><td>Stable in our stack</td><td>OpenAI claims o3-mini-like scores</td></tr>
+                                        <tr><td>Risk</td><td>Lower (already integrated)</td><td>Needs local eval on our corpora</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    );
+                    case 'metrics': return (
+                        <div className="section">
+                            <h2 className="section-title"><i className="fas fa-chart-bar"></i> Prototype Metrics (M1→M6 snapshot)</h2>
+                            <div className="section-content">
+                                <div className="metrics-grid">
+                                    <div className="metric-card">
+                                        <div className="metric-value">114</div>
+                                        <div className="metric-label">Total Files</div>
+                                    </div>
+                                    <div className="metric-card">
+                                        <div className="metric-value">640.4MB</div>
+                                        <div className="metric-label">Corpus Size</div>
+                                    </div>
+                                    <div className="metric-card">
+                                        <div className="metric-value">8|21|85</div>
+                                        <div className="metric-label">High|Med|Low Quality</div>
+                                    </div>
+                                    <div className="metric-card">
+                                        <div className="metric-value">0.368</div>
+                                        <div className="metric-label">Avg Relevance Score</div>
+                                    </div>
+                                </div>
+                                <p>These figures constitute the baseline for M6-M12 improvements (speech, translation, and model evaluation).</p>
+                            </div>
+                        </div>
+                    );
+                    case 'evaluation': return (
+                        <div className="section">
+                            <h2 className="section-title"><i className="fas fa-clipboard-check"></i> Evaluation Plan</h2>
+                            <div className="section-content">
+                                <h3>Datasets & Tasks</h3>
+                                <ul>
+                                    <li>Grounded Q&A set (50–100 prompts) across seeds/soils/pests</li>
+                                    <li>Multilingual pairs (EN↔FR↔SW↔AR) for retrieval robustness</li>
+                                    <li>Speech variants (noisy vs. clean) to test STT sensitivity</li>
+                                </ul>
+                                <h3>Metrics</h3>
+                                <ul>
+                                    <li>Faithfulness (source-supported units/claims present)</li>
+                                    <li>Citation correctness, answer completeness</li>
+                                    <li>Toxicity/safety, latency</li>
+                                    <li>Human-in-the-loop scoring (two reviewers) + automated rubric</li>
+                                </ul>
+                            </div>
+                        </div>
+                    );
+                    case 'integration': return (
+                        <div className="section">
+                            <h2 className="section-title"><i className="fas fa-puzzle-piece"></i> Integration and Reuse</h2>
+                            <div className="section-content">
+                                <p>WP4 shares patterns with WP3/WP5: ETL utilities, embeddings/FAISS stack, and governance patterns are reusable. Hosting starts on a workstation; heavy tests can target HPC-Anunna; all exposed through a modular API so other WPs can plug into the retriever/LLM.</p>
+                            </div>
+                        </div>
+                    );
+                    case 'risks': return renderRisks();
+                    case 'roadmap': return renderRoadmap();
+                    default: return <div>Section not found</div>;
+                }
+            };
+
+            return (
+                <div className="container">
+                    <div className="sidebar">
+                        <div className="sidebar-header">
+                            <div className="sidebar-title">WP4 — AI for Local-Language Farm Advisory</div>
+                            <div className="sidebar-subtitle">M6 "Use Case Vision & Design" Report</div>
+                        </div>
+                        
+                        <div className="search-box">
+                            <input
+                                type="text"
+                                className="search-input"
+                                placeholder="Search sections..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                            />
+                        </div>
+                        
+                        <div className="nav-menu">
+                            {filteredSections.map(section => (
+                                <div
+                                    key={section.id}
+                                    className={`nav-item ${activeSection === section.id ? 'active' : ''}`}
+                                    onClick={() => setActiveSection(section.id)}
+                                >
+                                    <i className={section.icon}></i>
+                                    <span>{section.title}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    
+                    <div className="main-content">
+                        <div className="content-header">
+                            <h1 className="content-title">WP4 — AI for Local-Language Farm Advisory</h1>
+                            <p className="content-subtitle">M6 "Use Case Vision & Design" Report</p>
+                            <div className="milestone-badge">Milestone 6 Deliverable</div>
+                        </div>
+                        
+                        <div className="content-body">
+                            {renderSection(activeSection)}
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
