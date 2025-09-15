@@ -201,7 +201,7 @@
         <Section icon="fas fa-project-diagram" title="Architecture (high-level)">
           <p>At its core, WP4 is a grounded question-answering system: users ask in Swahili/French/Arabic/English/Dutch; we transcribe/translate, retrieve evidence from WUR sources and selected open data, and generate a cited answer. Everything runs on-prem by default.</p>
           <div className="architecture-diagram">
-            <h3>System Components</h3>
+            <h3>System Components</h2>
             <div className="diagram-layer layer-interface">
               <div className="layer-title">🌐 Multilingual I/O Interface</div>
               <p>STT (Speech-to-Text) • Translation • TTS (Text-to-Speech) • Web UI/API</p>
@@ -212,14 +212,14 @@
             </div>
             <div className="diagram-layer layer-etl">
               <div className="layer-title">⚙️ ETL & Indexing Pipeline</div>
-              <p>Extract & Parse • Transform & QA • Embed & Index (FAISS/HNSW)</p>
+              <p>Extract & Parse • Transform & QA • Embed & Index (FAISS/HNSW libraries)</p>
             </div>
             <div className="diagram-layer layer-data">
               <div className="layer-title">📊 Data Layer</div>
               <p>WUR Reports (PDF/DOCX) • WUR Datasets (CSV/Parquet) • External Open Data (FAOSTAT, TASAI)</p>
             </div>
           </div>
-          <h3>Key Design Principles</h3>
+          <h3>Key Design Principles</h2>
           <ul>
             <li><strong>On-Premises Deployment:</strong> Ensures data sovereignty and compliance</li>
             <li><strong>Hybrid Search:</strong> Combines semantic understanding with keyword matching</li>
@@ -236,8 +236,8 @@
               <tr><th>Source Group</th><th>Examples</th><th>Acquisition</th><th>Processing</th><th>Use</th></tr>
             </thead>
             <tbody>
-              <tr><td>WUR internal reports</td><td>WUR project reports, policy briefs</td><td>File share / Library export</td><td>PDF text extraction; metadata capture</td><td>RAG context + citations</td></tr>
-              <tr><td>WUR datasets</td><td>CGN/seed, trials, soils</td><td>CSV/Parquet import</td><td>Schema infer; units; quality flags</td><td>Lightweight analytics; retrieval</td></tr>
+              <tr><td>WUR Library Assets</td><td>WUR project reports, policy briefs</td><td>File share / Library export</td><td>PDF text extraction; metadata capture</td><td>RAG context + citations</td></tr>
+              <tr><td>WUR datasets</td><td>CGN/seed, trials, soils</td><td>CSV/Parquet import</td><td>Schema infer; units; quality flags</td><td>Lightweight analytics; retrieval (Phase 2)</td></tr>
               <tr><td>External open data</td><td>FAOSTAT, World Bank, TASAI</td><td>HTTP/CSV</td><td>Harmonize + provenance</td><td>Background stats; retrieval hints</td></tr>
             </tbody>
           </table>
@@ -247,7 +247,7 @@
 
       const renderPrototype = () => (
         <Section icon="fas fa-cogs" title="Current Prototype and Corpus">
-          <p>From the symposium work: we have a functioning ETL → FAISS → local LLM pipeline on a research workstation.</p>
+          <p>As of now, we already have a functioning ETL → FAISS → local LLM pipeline on a research workstation.</p>
           <div className="metrics-grid">
             <div className="metric-card"><div className="metric-value">69</div><div className="metric-label">PDF Files</div></div>
             <div className="metric-card"><div className="metric-value">44</div><div className="metric-label">CSV Files</div></div>
@@ -256,7 +256,8 @@
           </div>
           <div className="highlight-box">
             <div className="highlight-title"><i className="fas fa-info-circle"></i>Why These Gates Matter</div>
-            <p>With agricultural content, precision beats recall. A smaller, vetted index reduces irrelevant retrievals, improves answer faithfulness, and simplifies quality audits. We aggressively curate the top ~25% of sources for the live index.</p>
+            <p>With agricultural content, precision beats recall. A smaller, vetted index reduces irrelevant retrievals, improves answer faithfulness, and simplifies quality audits.</div>
+            <p>We aggressively curate the top ~25% of sources for the live index.</p>
           </div>
         </Section>
       );
