@@ -201,7 +201,7 @@
         <Section icon="fas fa-project-diagram" title="Architecture (high-level)">
           <p>At its core, WP4 is a grounded question-answering system: users ask in Swahili/French/Arabic/English/Dutch; we transcribe/translate, retrieve evidence from WUR sources and selected open data, and generate a cited answer. Everything runs on-prem by default.</p>
           <div className="architecture-diagram">
-            <h3>System Components</h2>
+            <h3>System Components</h3>
             <div className="diagram-layer layer-interface">
               <div className="layer-title">🌐 Multilingual I/O Interface</div>
               <p>STT (Speech-to-Text) • Translation • TTS (Text-to-Speech) • Web UI/API</p>
@@ -219,7 +219,7 @@
               <p>WUR Reports (PDF/DOCX) • WUR Datasets (CSV/Parquet) • External Open Data (FAOSTAT, TASAI)</p>
             </div>
           </div>
-          <h3>Key Design Principles</h2>
+          <h3>Key Design Principles</h3>
           <ul>
             <li><strong>On-Premises Deployment:</strong> Ensures data sovereignty and compliance</li>
             <li><strong>Hybrid Search:</strong> Combines semantic understanding with keyword matching</li>
@@ -256,7 +256,7 @@
           </div>
           <div className="highlight-box">
             <div className="highlight-title"><i className="fas fa-info-circle"></i>Why These Gates Matter</div>
-            <p>With agricultural content, precision beats recall. A smaller, vetted index reduces irrelevant retrievals, improves answer faithfulness, and simplifies quality audits.</div>
+            <p>With agricultural content, precision beats recall. A smaller, vetted index reduces irrelevant retrievals, improves answer faithfulness, and simplifies quality audits.</p>
             <p>We aggressively curate the top ~25% of sources for the live index.</p>
           </div>
         </Section>
@@ -315,7 +315,7 @@
       const renderRoadmap = () => (
         <Section icon="fas fa-road" title="Roadmap M6→M12">
           <div style={{display:'grid',gap:'20px'}}>
-            <div style="background:#e3f2fd;padding:20px;border-radius:8px;border-left:5px solid #2196f3">
+            <div style={{background:'#e3f2fd',padding:'20px',borderRadius:'8px',borderLeft:'5px solid #2196f3'}}>
               <h4>M6→M8: Foundation</h4>
               <ul>
                 <li>Integrate speech + translation</li>
@@ -323,7 +323,7 @@
                 <li>Polish retriever policy (pivot thresholds)</li>
               </ul>
             </div>
-            <div style="background:#f3e5f5;padding:20px;border-radius:8px;border-left:5px solid #9c27b0">
+            <div style={{background:'#f3e5f5',padding:'20px',borderRadius:'8px',borderLeft:'5px solid #9c27b0'}}>
               <h4>M7→M9: Model Evaluation</h4>
               <ul>
                 <li>Side-by-side eval: Mistral-7B vs gpt-oss-20b</li>
@@ -331,7 +331,7 @@
                 <li>Pick default model</li>
               </ul>
             </div>
-            <div style="background:#e8f5e8;padding:20px;border-radius:8px;border-left:5px solid #4caf50">
+            <div style={{background:'#e8f5e8',padding:'20px',borderRadius:'8px',borderLeft:'5px solid #4caf50'}}>
               <h4>M8→M10: UX & Testing</h4>
               <ul>
                 <li>UX hardening</li>
@@ -339,7 +339,7 @@
                 <li>Curate v2 eval set</li>
               </ul>
             </div>
-            <div style="background:#fff3e0;padding:20px;border-radius:8px;border-left:5px solid #ff9800">
+            <div style={{background:'#fff3e0',padding:'20px',borderRadius:'8px',borderLeft:'5px solid #ff9800'}}>
               <h4>M10→M12: Delivery</h4>
               <ul>
                 <li>Freeze D4.1 demo build</li>
