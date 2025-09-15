@@ -389,13 +389,17 @@
           case 'metrics':
             return (
               <Section icon="fas fa-chart-bar" title="Prototype Metrics (M1→M6 snapshot)">
+                <div className="highlight-box">
+                  <div className="highlight-title"><i className="fas fa-info-circle"></i>Prototype Development Note</div>
+                  <p>We are currently prototyping with a small subset of files due to local personal laptop resource limitations. While we have access to <strong>>3000 relevant documents</strong> for RAG, we are testing vectorization and RAG functionality on this curated subset to validate our approach before scaling up.</p>
+                </div>
                 <div className="metrics-grid">
-                  <div className="metric-card"><div className="metric-value">114</div><div className="metric-label">Total Files</div></div>
-                  <div className="metric-card"><div className="metric-value">640.4MB</div><div className="metric-label">Corpus Size</div></div>
+                  <div className="metric-card"><div className="metric-value">114</div><div className="metric-label">Prototype Files (Subset)</div></div>
+                  <div className="metric-card"><div className="metric-value">640.4MB</div><div className="metric-label">Prototype Corpus Size</div></div>
                   <div className="metric-card"><div className="metric-value">8|21|85</div><div className="metric-label">High|Med|Low Quality</div></div>
                   <div className="metric-card"><div className="metric-value">0.368</div><div className="metric-label">Avg Relevance Score</div></div>
                 </div>
-                <p>These figures constitute the baseline for M6-M12 improvements (speech, translation, and model evaluation).</p>
+                <p>These prototype figures constitute the baseline for M6-M12 improvements (speech, translation, and model evaluation). Full-scale deployment will utilize the complete >3000 document corpus.</p>
               </Section>
             );
           case 'evaluation':
