@@ -423,7 +423,12 @@
           case 'integration':
             return (
               <Section icon="fas fa-puzzle-piece" title="Integration and Reuse">
-                <p>WP4 shares patterns with WP3/WP5: ETL utilities, embeddings/FAISS stack, and governance patterns are reusable. Hosting starts on a workstation; heavy tests can target HPC-Anunna; all exposed through a modular API so other WPs can plug into the retriever/LLM.</p>
+                <ul>
+                  <li>WP4 shares patterns with WP3/WP5: ETL utilities, embeddings/FAISS stack, and governance patterns are reusable</li>
+                  <li>Hosting starts on workstation</li>
+                  <li>Heavy tests can target HPC-Anunna</li>
+                  <li>All exposed through a modular API so other WPs can plug into the retriever/LLM</li>
+                </ul>
               </Section>
             );
           case 'risks': return renderRisks();
